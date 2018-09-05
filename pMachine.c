@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h> 
 
+
+#define MAX_STACK_HEIGHT 2000
+#define MAX_CODE_LENGTH 500
+#define MAX_LEXI_LEVELS 3
+
 typedef struct ISA {
 	int op; //opcode
 	int r; //register [0 - 15] 
