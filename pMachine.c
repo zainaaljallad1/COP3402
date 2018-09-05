@@ -66,7 +66,7 @@ void sio (Stack *s, ISA *i, int *reg, int n) {
 	switch (n)
 
 	case (1):
-		printf(reg[i->r]
+		printf(reg[i->r]); 
 	case (2):
 	case (3): 
 }
@@ -77,6 +77,15 @@ void sio (Stack *s, ISA *i, int *reg, int n) {
 
 int main (void) {
 
+	ISA *i; 
+	Stack *s; 
+	int len = s->length; 
+
+	s->sp = 0; 
+	s->bp = 1; 
+	s->pc = 0; 
+	i->r = 0; 
 	
+	s->array = (int *) calloc (len, sizeof(int)); 
 
 } 
