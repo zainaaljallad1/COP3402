@@ -39,10 +39,16 @@ void lit (Stack *s, ISA *i, int *reg) {
 }
 
 int rtn (Stack *s) {
+	s->bp = s->bp -1;
+	s->sp = s->bp;
+	s->bp = s->array[(s->sp + 3)];
+	s->pc = s->array[(s->sp + 4)]; 
 }
 
 //m is data address
+//calculate base
 void lod (Stack *s, ISA *i, int *reg) {
+	reg[i->r] = s->array[base(l, bp) + i->m]; 
 }
 
 
