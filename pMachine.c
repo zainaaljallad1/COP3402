@@ -63,14 +63,18 @@ void cal (Stack *s, ISA *i, int *reg) {
 
 //m is a #
 void inc (Stack *s, ISA *i, int *reg) {
+	s->sp = s->sp + i->m; 
 }
 
 //m is a program address
 void jmp (Stack *s, ISA *i, int *reg) {
+	s->pc = i->m; 
 }
 
 //m is a program address
 void jpc (Stack *s, ISA *i, int *reg) {
+	if (reg[i->r] == 0) 
+		s->pc = i->m; 
 }
 
 void sio (Stack *s, ISA *i, int *reg, int n) {
