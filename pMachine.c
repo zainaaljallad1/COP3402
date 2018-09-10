@@ -9,7 +9,7 @@
 typedef struct ISA {
 	int op; //opcode
 	int r; //register [0 - 15] 
-	int l; //lexographical level or a register ? 
+	int lex; //lexographical level or a register ? 
 	int m; // depends (is arithemtic and logic inst. for add, mul, etc)
 }ISA; 
 
@@ -46,18 +46,28 @@ int rtn (Stack *s) {
 }
 
 //m is data address
-//calculate base
 void lod (Stack *s, ISA *i, int *reg) {
-	reg[i->r] = s->array[base(l, bp) + i->m]; 
+	temp = base(i->lex, s->bp); 
+	temp += i->m;
+	reg[i->r] = s->array[temp]; 
 }
 
 
 //m is data adress
 void sto (Stack *s, ISA *i, int *reg) {
+	temp = base (i->lex, s->bp);
+	temp += i->m; 
+	s->array[temp] = reg[i->r];
 }
 
 //m is a program address
 void cal (Stack *s, ISA *i, int *reg) {
+	s->array[s->sp + 1] = 0;
+	//s->array[s->sp + 2] = base
+	s->array[s->sp + 3] = s->bp; 
+	s->array[s->sp + 4] = s->pc;
+	s->bp = s->sp + 1; 
+	s->pc = i->m;  
 }
 
 
@@ -86,9 +96,43 @@ void sio (Stack *s, ISA *i, int *reg, int n) {
 	case (3): 
 }
 
+int base (ISA *i, Stack *s) {
+	int b1;
+ 	b1 = s->bp; 
+	while (i->lex > 0) {
+		b1 = s->array[b1 + i->lex]
+		i->lex--; 
+	} 
 
+	return b1;  
+}
 
+void neg (ISA *i, int *reg) {
+	reg[i->r] = -reg[i->lex]; 
+}
 
+void add (ISA *i, int *reg) {
+	reg[i->r] = (reg[i->lex] + reg[i->m]); 	
+}
+
+void sub (ISA *i, int *reg) {
+	reg[i->r] = (reg[i->lex] - reg[i->m]); 
+}
+
+void mul (ISA *i, int *reg) {
+	reg[i->r] = (reg[i->lex] * reg[i->m]); 
+}
+
+void div (ISA *i, int *reg) {
+	reg[i->r] = (reg[i->lex] / reg[i->m]); 
+}
+
+void odd (ISA *i, int *reg) {
+	if(reg[i->r] % 2 == 0) 
+		return 0;
+	else 
+		return 1;
+}
 
 int main (void) {
 
