@@ -137,7 +137,23 @@ void mod (ISA *i, int *reg) {
 	reg[i->r] = (reg[i->lex] % reg[i>m]);
 }
 
+void eql (ISA *i, int *reg) {
+	reg[i->r] = (reg[i->lex] == reg[i->m]); 
+}
 
+void neq (ISA *I, int *reg) {
+	if (reg[i->lex] != reg[i->m])
+		reg[i->r] = 1; 
+	else 
+		reg[i->r] = 0; 	
+}
+
+void lss (ISA *i, int *reg) {
+	if (reg[i->lex] < reg[i->m]) 
+		reg[i->r] = 1; 
+	else 
+		reg[i->r] = 0; 
+}
 int main (void) {
 
 	ISA *i; 
