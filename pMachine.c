@@ -127,12 +127,16 @@ void div (ISA *i, int *reg) {
 	reg[i->r] = (reg[i->lex] / reg[i->m]); 
 }
 
-void odd (ISA *i, int *reg) {
+int odd (ISA *i, int *reg) {
 	if(reg[i->r] % 2 == 0) 
 		return 0;
 	else 
 		return 1;
 }
+void mod (ISA *i, int *reg) {
+	reg[i->r] = (reg[i->lex] % reg[i>m]);
+}
+
 
 int main (void) {
 
