@@ -154,6 +154,27 @@ void lss (ISA *i, int *reg) {
 	else 
 		reg[i->r] = 0; 
 }
+
+void leq (ISA *i, int *reg) {
+	if (reg[i->lex] <= reg[i->m])
+		reg[i->r] = 1; 
+	else
+		reg[i->r] = 0; 
+}
+
+void gtr (ISA *i, int *reg) {
+	if (reg[i->lex] > reg[i->m])
+		reg[i->r] = 1; 
+	else 
+		reg[i->r] = 0; 
+}
+
+void geq (ISA *i, int *reg) {
+	if(reg[i->lex] >= reg[i->m])
+		reg[i->r] = 1;
+	else 
+		reg[i->r] = 0; 
+}
 int main (void) {
 
 	ISA *i; 
